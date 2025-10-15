@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Mother’s Cry – Christmas Worship Single</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b1023;
+      --gold: #d4af37;
+      --text-light: #f4f4f4;
+      --max-width: 800px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* STAR CANVAS */
+    #star-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--bg-dark);
+    }
+
+    /* SNOW */
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 1;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) translateX(0); opacity: 0.8; }
+      100% { transform: translateY(110vh) translateX(20px); opacity: 0.3; }
+    }
+
+    /* CONTENT */
+    h1, h2 {
+      font-family: "Cinzel", serif;
+    }
+
+    header, section, footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* HERO */
+    header {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(11,16,35,1)),
+        url('https://images.unsplash.com/photo-1608889175432-3eec5ed02d66?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      padding: 5rem 1rem;
+      color: var(--text-light);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideIn 1.2s ease-out forwards;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-btn {
+      background-color: var(--gold);
+      color: #000;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
+      transition: background-color 0.2s;
+    }
+
+    .cta-btn:hover {
+      background-color: #f0d87a;
+    }
+
+    /* Sections */
+    section {
+      max-width: var(--max-width);
+      margin: 3rem auto;
+      padding: 0 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideIn 1s ease-out forwards;
+    }
+
+    section:nth-of-type(1) { animation-delay: 0.2s; }
+    section:nth-of-type(2) { animation-delay: 0.4s; }
+    section:nth-of-type(3) { animation-delay: 0.6s; }
+    section:nth-of-type(4) { animation-delay: 0.8s; }
+    section:nth-of-type(5) { animation-delay: 1s; }
+
+    h2 {
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    /* Lyrics accordion */
+    .lyrics {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    details {
+      margin-bottom: 1rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--gold);
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* Mailing List */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    input[type="email"], input[type="text"] {
+      padding: 0.5rem;
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      background: var(--gold);
+      border: none;
+      padding: 0.6rem 1rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideIn 1s ease-out 1.2s forwards;
+    }
+
+    .social-links a {
+      color: var(--gold);
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      iframe { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STAR CANVAS -->
+  <canvas id="star-canvas"></canvas>
+
+  <!-- SNOW -->
+  <div id="snow-container"></div>
+
+  <!-- HERO -->
+  <header>
+    <h1>✨ A Mother’s Cry</h1>
+    <p>Christmas Worship Single · Releases <strong>November 7, 2025</strong></p>
+    <a href="#" class="cta-btn">🔔 Pre-Save Coming Soon</a>
+  </header>
+
+  <!-- STORY -->
+  <section>
+    <h2>The Story Behind the Song</h2>
+    <p>
+      Inspired by <strong>Luke 1–2</strong>, “A Mother’s Cry” follows Mary’s encounter with the angel, her quiet
+      pondering of God’s promises, and the heavens’ triumphant chorus:
+    </p>
+    <blockquote>“Glory to God in the highest!”</blockquote>
+    <p>This Christmas, step into Mary’s story and join heaven’s worship.</p>
+  </section>
+
+  <!-- VIDEO -->
+  <section>
+    <h2>🎬 Watch the Teaser</h2>
+    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+  </section>
+
+  <!-- LYRICS -->
+  <section>
+    <h2>📝 Lyrics Preview</h2>
+    <div class="lyrics">
+      <details>
+        <summary>Verse 1</summary>
+        <p>In the stillness, an angel’s voice broke through the night...</p>
+      </details>
+      <details>
+        <summary>Chorus</summary>
+        <p>Glory to God in the highest / Peace on earth, Your kingdom come...</p>
+      </details>
+      <p><a href="#" target="_blank">👉 View Full Lyrics (PDF)</a></p>
+    </div>
+  </section>
+
+  <!-- MAILING LIST -->
+  <section>
+    <h2>📬 Join the Journey</h2>
+    <p>Be the first to hear new worship releases, choir resources, and Christmas content.</p>
+    <form action="https://YOUR_CONVERTKIT_FORM_ACTION" method="post">
+      <input type="text" name="first_name" placeholder="Your name (optional)">
+      <input type="email" name="email_address" placeholder="Your email address" required>
+      <label>
+        <input type="checkbox" name="worship_leader" value="yes"> I’m a worship leader
+      </label>
+      <input type="submit" value="Sign Me Up">
+    </form>
+  </section>
+
+  <!-- SOCIAL -->
+  <footer>
+    <div class="social-links">
+      <a href="https://instagram.com/yourhandle" aria-label="Instagram">📲</a>
+      <a href="https://youtube.com/yourchannel" aria-label="YouTube">▶️</a>
+      <a href="https://open.spotify.com/artist/yourartistid" aria-label="Spotify">🎧</a>
+      <a href="https://facebook.com/yourpage" aria-label="Facebook">🕊️</a>
+    </div>
+    <p>© 2025 Your Name · Independent Christian Artist, Lindenhurst IL<br>✨ Glory to God Alone</p>
+  </footer>
+
+  <script>
+    // STARFIELD
+    const canvas = document.getElementById('star-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 100;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for(let i=0; i<numStars; i++){
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.5,
+        opacity: Math.random(),
+        delta: Math.random() * 0.02 + 0.01
+      });
+    }
+
+    function drawStars(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for(let star of stars){
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, 2*Math.PI);
+        ctx.fillStyle = `rgba(255,255,255,${star.opacity})`;
+        ctx.fill();
+        star.opacity += star.delta;
+        if(star.opacity > 1 || star.opacity < 0.2) star.delta *= -1;
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    drawStars();
+
+    // SNOWFLAKES
+    const snowContainer = document.getElementById('snow-container');
+    const snowflakeCount = 50;
+
+    for(let i=0; i<snowflakeCount; i++){
+      const snow = document.createElement('div');
+      snow.className = 'snowflake';
+      snow.style.left = Math.random() * 100 + 'vw';
+      const size = Math.random() * 4 + 2;
+      snow.style.width = size + 'px';
+      snow.style.height = size + 'px';
+      snow.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      snow.style.opacity = Math.random() * 0.8 + 0.2;
+      snowContainer.appendChild(snow);
+    }
+  </script>
+</body>
+</html>
