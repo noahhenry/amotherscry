@@ -371,7 +371,28 @@
       /* Make hero image larger on small screens */
       header .hero img { width: 80%; }
     }
+
+    /* BUY Button */
+    .buy-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      transition: box-shadow 0.3s ease, transform 0.2s;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
+    .buy-btn:hover {
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.9), 0 0 40px rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+    }
   </style>
+  <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
 </head>
 <body>
 
@@ -415,6 +436,37 @@
   
       <audio id="audio" src="assets/a-mothers-cry-preview-1.mp3"></audio>
     </div>
+  </section>
+
+  <!-- BUY THE SONG SECTION -->
+  <!-- <section>
+    <h2>💿 Own <em>“A Mother’s Cry”</em></h2>
+    <p>Support the music directly and download your own copy of the single.<br>
+      Your purchase helps fund future worship releases and resources for the Church.</p>
+  
+    <a class="buy-btn gumroad-button" href="https://yourname.gumroad.com/l/amotherscry" target="_blank">
+      🎁 Buy Now · $2.00
+    </a>
+  
+    <p style="font-size:0.9rem; opacity:0.8; margin-top:0.5rem;">
+      Available as high-quality MP3 + lyric PDF.
+    </p>
+  </section> -->
+
+  <!-- BUY THE SONG SECTION (PAYHIP) -->
+  <section>
+    <h2>💿 Own <em>“A Mother’s Cry”</em></h2>
+    <p>Support the music directly and download your own copy of the single.<br>
+      Your purchase helps fund future worship releases and resources for the Church.</p>
+
+    <!-- Replace the href below with your actual Payhip product link -->
+    <a class="buy-btn" href="https://payhip.com/b/LwjyQ" data-product="LwjyQ" target="_blank">
+      🎁 Buy Now · $1.50
+    </a>
+
+    <p style="font-size:0.9rem; opacity:0.8; margin-top:0.5rem;">
+      Includes high-quality MP3 + lyric PDF download.
+    </p>
   </section>
 
   <!-- STORY -->
