@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Mother’s Cry – Christmas Worship Single</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0b1023;
-      --gold: #d4af37;
+      --gold: #ad7c34;
       --text-light: #f4f4f4;
       --max-width: 800px;
     }
 
     body {
       margin: 0;
-      font-family: "Inter", sans-serif;
+      font-family: "Montserrat", sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-light);
       line-height: 1.6;
@@ -65,7 +65,7 @@
 
     /* CONTENT */
     h1, h2 {
-      font-family: "Cinzel", serif;
+      font-family: "Playfair Display", serif;
     }
 
     header, section, footer {
@@ -82,6 +82,16 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeSlideIn 1.2s ease-out forwards;
+    }
+
+    header .hero img {
+      width: 50%;
+      max-width: 500px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 4px solid var(--gold);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      margin-bottom: 1rem;
     }
 
     header h1 {
@@ -129,6 +139,143 @@
       color: var(--gold);
       margin-bottom: 1rem;
     }
+
+    /* AUDIO PLAYER START */
+    .audio-player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .cover-art {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .player-controls {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .play-btn {
+      background: var(--gold);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin: 0 auto 0.5rem auto;
+      color: #000;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+      transition: box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .play-btn:hover {
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.9), 0 0 40px rgba(212, 175, 55, 0.4);
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      display: none;
+    }
+
+    .play-btn.playing .pause-icon {
+      display: block;
+    }
+
+    .play-btn.playing .play-icon {
+      display: none;
+    }
+
+    .play-btn:not(.playing) .play-icon {
+      display: block;
+    }
+
+    .track-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #progress {
+      flex: 1;
+      appearance: none;
+      height: 4px;
+      background: linear-gradient(to right, var(--gold), #f5e3a3);
+      border-radius: 2px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #progress::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.8);
+    }
+
+    #current-time, #duration {
+      font-size: 0.8rem;
+    }
+    /* AUDIO PLAYER END */
+
+    /* AUDIO PLAYER PT. 2 */
+    /* Fade in player section */
+    .audio-player {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.2s ease-out forwards;
+      animation-delay: 0.6s; /* Adjust to match where it appears on page */
+    }
+
+    /* Gentle glowing pulse when idle (not playing) */
+    .play-btn:not(.playing) {
+      animation: pulseGlow 2.5s ease-in-out infinite;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.4), 0 0 20px rgba(212, 175, 55, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.9), 0 0 40px rgba(212, 175, 55, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.4), 0 0 20px rgba(212, 175, 55, 0.2);
+      }
+    }
+    /* AUDIO PLAYER PT. 2 END */
+
 
     iframe {
       width: 100%;
@@ -205,6 +352,13 @@
       font-size: 1.5rem;
     }
 
+    .social-icon {
+      width: 24px;
+      height: 24px;
+      filter: invert(1);
+      transition: filter 0.3s;
+    }
+
     /* Animations */
     @keyframes fadeSlideIn {
       from { opacity: 0; transform: translateY(20px); }
@@ -214,6 +368,8 @@
     @media (max-width: 600px) {
       header h1 { font-size: 2rem; }
       iframe { height: 200px; }
+      /* Make hero image larger on small screens */
+      header .hero img { width: 80%; }
     }
   </style>
 </head>
@@ -228,46 +384,88 @@
   <!-- HERO -->
   <header>
     <div id="albumn-cover" class="hero"><img src="assets/albumn-cover.jpg"></div>
-    <h1>✨ A Mother’s Cry</h1>
+    <h1>A Mother’s Cry</h1>
+    <h3>GLORY TO GOD</h3>
     <p>Christmas Worship Single · Releases <strong>November 7, 2025</strong></p>
     <a href="#" class="cta-btn">🔔 Pre-Save Coming Soon</a>
   </header>
+
+  <!-- AUDIO PREVIEW -->
+  <section>
+    <h2>🎧 Song Preview</h2>
+    <div class="audio-player">
+      <img src="assets/albumn-cover.jpg" alt="Song cover" class="cover-art">
+  
+      <div class="player-controls">
+        <button id="play-pause" class="play-btn" aria-label="Play">
+          <svg class="icon play-icon" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" fill="currentColor" />
+          </svg>
+          <svg class="icon pause-icon" viewBox="0 0 24 24">
+            <path d="M6 19h4V5H6zm8-14v14h4V5h-4z" fill="currentColor" />
+          </svg>
+        </button>
+  
+        <div class="track-info">
+          <span id="current-time">0:00</span>
+          <input type="range" id="progress" value="0" min="0" max="100">
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+  
+      <audio id="audio" src="assets/a-mothers-cry-preview-1.mp3"></audio>
+    </div>
+  </section>
 
   <!-- STORY -->
   <section>
     <h2>The Story Behind the Song</h2>
     <p>
-      Inspired by <strong>Luke 1–2</strong>, “A Mother’s Cry” follows Mary’s encounter with the angel, her quiet
-      pondering of God’s promises, and the heavens’ triumphant chorus:
+      Inspired by <strong>Luke 1–2</strong>, “A Mother’s Cry” follows Mary’s encounter with the angel Gabriel, the encounter of the angels and the
+      shepherds on the night of Jesus' birth, and the heavens’ triumphant chorus:
     </p>
     <blockquote>“Glory to God in the highest!”</blockquote>
     <p>This Christmas, step into Mary’s story and join heaven’s worship.</p>
   </section>
 
   <!-- VIDEO -->
-  <section>
+  <!-- <section>
     <h2>🎬 Watch the Teaser</h2>
     <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
-  </section>
+  </section> -->
 
   <!-- LYRICS -->
-  <section>
+  <!-- <section>
     <h2>📝 Lyrics Preview</h2>
     <div class="lyrics">
       <details>
         <summary>Verse 1</summary>
-        <p>In the stillness, an angel’s voice broke through the night...</p>
+        <p>
+          “Greetings, favored woman!<br>
+          The Lord is with you!”<br>
+          No need to be afraid.<br>
+          Though you are still a virgin,<br>
+          you will conceive and birth a son.<br>
+          You will name him Jesus.<br>
+          He will be the Messiah.<br>
+          God Himself, in the flesh.
+        </p>
       </details>
       <details>
         <summary>Chorus</summary>
-        <p>Glory to God in the highest / Peace on earth, Your kingdom come...</p>
+        <p>
+          Can you hear it?<br>
+          A mother’s cry brings life to her baby.<br>
+          Can you hear it?<br>
+          The angels sing, “Glory to God in the highest.”
+        </p>
       </details>
       <p><a href="#" target="_blank">👉 View Full Lyrics (PDF)</a></p>
     </div>
-  </section>
+  </section> -->
 
   <!-- MAILING LIST -->
-  <section>
+  <!-- <section>
     <h2>📬 Join the Journey</h2>
     <p>Be the first to hear new worship releases, choir resources, and Christmas content.</p>
     <form action="https://YOUR_CONVERTKIT_FORM_ACTION" method="post">
@@ -278,17 +476,25 @@
       </label>
       <input type="submit" value="Sign Me Up">
     </form>
-  </section>
+  </section> -->
 
   <!-- SOCIAL -->
   <footer>
     <div class="social-links">
-      <a href="https://instagram.com/yourhandle" aria-label="Instagram">📲</a>
-      <a href="https://youtube.com/yourchannel" aria-label="YouTube">▶️</a>
-      <a href="https://open.spotify.com/artist/yourartistid" aria-label="Spotify">🎧</a>
-      <a href="https://facebook.com/yourpage" aria-label="Facebook">🕊️</a>
+      <a href="https://www.youtube.com/@NoahHenryMusic" aria-label="YouTube" target="_blank" rel="noopener">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" class="social-icon">
+      </a>
+      <a href="https://www.tiktok.com/@noahhenrymusic" aria-label="TikTok" target="_blank" rel="noopener">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" class="social-icon">
+      </a>
+      <a href="https://open.spotify.com/artist/1WHCaqNh1EfNvHaf1VQZJx?si=_G0GN3s8R6CuCrCDs_qrTw" aria-label="Spotify" target="_blank" rel="noopener">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg" alt="Spotify" class="social-icon">
+      </a>
+      <a href="https://www.instagram.com/noahhenrymusic/" aria-label="Instagram" target="_blank" rel="noopener">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" class="social-icon">
+      </a>
     </div>
-    <p>© 2025 Your Name · Independent Christian Artist, Lindenhurst IL<br>✨ Glory to God Alone</p>
+    <p>© 2025 Noah Henry · Independent Christian Artist, Chicago, IL<br>✨ Glory to God Alone</p>
   </footer>
 
   <script>
@@ -326,7 +532,8 @@
         star.opacity += star.delta;
         if(star.opacity > 1 || star.opacity < 0.2) star.delta *= -1;
       }
-      requestAnimationFrame(drawStars);
+      // requestAnimationFrame(drawStars);
+      // setTimeout(drawStars, 5000);
     }
 
     drawStars();
@@ -345,6 +552,42 @@
       snow.style.animationDuration = (Math.random() * 10 + 5) + 's';
       snow.style.opacity = Math.random() * 0.8 + 0.2;
       snowContainer.appendChild(snow);
+    }
+
+    // AUDIO PLAYER
+    const audioEl = document.getElementById('audio');
+    const playBtn = document.getElementById('play-pause');
+    const progressBar = document.getElementById('progress');
+    const currentTimeDisplay = document.getElementById('current-time');
+    const durationDisplay = document.getElementById('duration');
+
+    playBtn.addEventListener('click', () => {
+      if (audioEl.paused) {
+        audioEl.play();
+        playBtn.classList.add('playing');
+      } else {
+        audioEl.pause();
+        playBtn.classList.remove('playing');
+      }
+    });
+
+    audioEl.addEventListener('loadedmetadata', () => {
+      durationDisplay.textContent = formatTime(audioEl.duration);
+    });
+
+    audioEl.addEventListener('timeupdate', () => {
+      progressBar.value = (audioEl.currentTime / audioEl.duration) * 100;
+      currentTimeDisplay.textContent = formatTime(audioEl.currentTime);
+    });
+
+    progressBar.addEventListener('input', () => {
+      audioEl.currentTime = (progressBar.value / 100) * audioEl.duration;
+    });
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${minutes}:${secs.toString().padStart(2, '0')}`;
     }
   </script>
 </body>
