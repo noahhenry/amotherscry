@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- For IE 9 and below. ICO should be 32x32 pixels in size -->
+  <!--[if IE]><link rel="shortcut icon" href="path/to/favicon.ico"><![endif]-->
+  <!-- IE 10+ "Metro" Tiles - 144x144 pixels in size icon should be transparent -->
+  <meta name="msapplication-TileColor" content="#0b1023">
+  <meta name="msapplication-TileImage" content="assets/apple-touch-icon-precomposed.png">
+  <!-- Touch Icons - iOS and Android 2.1+ 152x152 pixels in size. --> 
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-touch-icon-precomposed.png">
+  <!-- Firefox, Chrome, Safari, IE 11+ and Opera. 96x96 pixels in size. -->
+  <link rel="icon" href="assets/favicon.png">
   <meta name="description" content="A cinematic Christmas worship song inspired by Luke 1–2. Listen to 'A Mother’s Cry' by Noah Henry — available November 7, 2025.">
   <meta name="keywords" content="A Mother's Cry, Noah Henry, Glory to God, Christmas worship song, Luke 1 2, Christian music, Advent, worship leader">
   <meta name="author" content="Noah Henry">
@@ -78,6 +87,7 @@
 
     /* HERO */
     header {
+      /* TODO: remove this url? */
       background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(11,16,35,1)),
         url('https://images.unsplash.com/photo-1608889175432-3eec5ed02d66?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
       padding: 5rem 1rem;
