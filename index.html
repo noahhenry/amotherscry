@@ -404,6 +404,67 @@
       box-shadow: 0 0 20px rgba(212, 175, 55, 0.9), 0 0 40px rgba(212, 175, 55, 0.4);
       transform: translateY(-2px);
     }
+
+    /* Countdown */
+    #release-countdown {
+      max-width: 650px;
+      /* margin: 2rem auto 0;
+      padding: 1.5rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.08);
+      opacity: 0; transform: translateY(20px);
+      animation: fadeSlideIn 1s ease-out forwards;
+      animation-delay: 0.4s;
+      text-align: center; */
+    }
+
+    #release-countdown h2 {
+      margin: 0 0 .25rem 0;
+      color: var(--gold);
+    }
+
+    #release-countdown .countdown-sub {
+      margin: 0 0 1rem 0;
+      opacity: .9;
+    }
+
+    .count-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(70px, 1fr));
+      gap: .75rem;
+      justify-items: center;
+    }
+
+    .count-grid .cell {
+      width: 100%;
+      padding: 1rem .5rem;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.25);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    }
+
+    .count-grid .cell span {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .count-grid .cell label {
+      display: block;
+      margin-top: .35rem;
+      font-size: .8rem;
+      opacity: .85;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 520px) {
+      .count-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
   <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
 </head>
@@ -421,8 +482,27 @@
     <h1>A Mother’s Cry</h1>
     <h3>GLORY TO GOD</h3>
     <p>Christmas Worship Single · Releases <strong>November 7, 2025</strong></p>
-    <a href="#" class="cta-btn">🔔 Pre-Save Coming Soon</a>
+    <a id="cta" class="cta-btn" href="https://show.co/c891pFs" target="_blank" rel="noopener">
+      🔔 Pre-Save Now
+    </a>
   </header>
+
+  <!-- ⏳ Release Countdown -->
+  <section id="release-countdown" aria-label="Countdown to release">
+    <h2>⏳ Counting down to release</h2>
+    <!-- <p class="countdown-sub">A Mother’s Cry arrives <strong>November 7, 2025</strong></p> -->
+
+    <div class="count-grid" role="timer" aria-live="polite">
+      <div class="cell"><span id="dd">--</span><label>Days</label></div>
+      <div class="cell"><span id="hh">--</span><label>Hours</label></div>
+      <div class="cell"><span id="mm">--</span><label>Minutes</label></div>
+      <div class="cell"><span id="ss">--</span><label>Seconds</label></div>
+    </div>
+    <noscript>
+      <p>Releases on November 7, 2025.</p>
+    </noscript>
+  </section>
+
 
   <!-- AUDIO PREVIEW -->
   <section>
@@ -654,6 +734,60 @@
       const secs = Math.floor(seconds % 60);
       return `${minutes}:${secs.toString().padStart(2, '0')}`;
     }
+
+    // COUNTDOWN TIMER
+    // ===== Countdown to local release time (America/Chicago) =====
+    (function () {
+      // Set your release date/time in Central Time (UTC-06:00 standard; browser will convert)
+      const releaseAt = new Date("2025-11-07T00:00:00-06:00").getTime();
+
+      const elD = document.getElementById("dd");
+      const elH = document.getElementById("hh");
+      const elM = document.getElementById("mm");
+      const elS = document.getElementById("ss");
+      const section = document.getElementById("release-countdown");
+
+      // Optional: update your existing CTA text after release
+      const cta = document.getElementById("cta"); // your hero button id
+
+      function pad(n){ return n.toString().padStart(2,"0"); }
+
+      function tick() {
+        const now = Date.now();
+        let diff = releaseAt - now;
+
+        if (diff <= 0) {
+          // Release time reached
+          if (elD && elH && elM && elS) {
+            elD.textContent = "00"; elH.textContent = "00";
+            elM.textContent = "00"; elS.textContent = "00";
+          }
+          // Hide countdown (optional: remove if you want to keep at 00:00)
+          if (section) section.style.display = "none";
+
+          // Flip CTA label to "Listen Now" (your Show.co link can auto-redirect)
+          if (cta) cta.textContent = "▶️ Listen Now";
+          clearInterval(int);
+          return;
+        }
+
+        const d = Math.floor(diff / (1000*60*60*24));
+        diff -= d * (1000*60*60*24);
+        const h = Math.floor(diff / (1000*60*60));
+        diff -= h * (1000*60*60);
+        const m = Math.floor(diff / (1000*60));
+        diff -= m * (1000*60);
+        const s = Math.floor(diff / 1000);
+
+        if (elD) elD.textContent = pad(d);
+        if (elH) elH.textContent = pad(h);
+        if (elM) elM.textContent = pad(m);
+        if (elS) elS.textContent = pad(s);
+      }
+
+      tick(); // initial draw
+      const int = setInterval(tick, 500);
+    })();
   </script>
 </body>
 </html>
